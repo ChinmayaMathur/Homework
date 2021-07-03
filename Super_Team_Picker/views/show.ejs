@@ -1,0 +1,62 @@
+<%- include("./partials/header") %>
+
+<div class="card" style="width: 18erm;">
+      <div class="card-body">
+            <h2 class="card-title"><%= team.name %></h2>
+            <p class="card-text"><%= team.members %></p>
+      </div>  
+<hr class="line">  
+<form>
+      <div class="card-body">
+            <div class="form-group col-md-6">
+                  <p class="card-title">Method</p>
+                  <input type="radio"  id="teamCount" name="assign_by" value="teamCount">
+                  <label for="teamCount">Team Count</label><br>
+                  <input type="radio"  id="numTeam"  name="assign_by" value="numTeam">
+                  <label for="numTeam">Number Per Team</label><br>
+            </div>            
+            <br>
+            <div class="form-group col-md-6">
+                  <label for="quantity">Quantity</label>
+                  <input name="quantity" type="text" class="form-control text1" id="quantity">
+            </div>
+            <br>
+            <button type="submit" class="button">Assign Teams</button>
+      </div>  
+
+      <% if(team.assign_by === team.id.teamCount) { %> 
+            <% if (team.quantity) { %> 
+                  <div><h5># Members</h5></div>
+                  <hr class="line">
+                  <div>
+                  <% function assignTeam(team) { %>
+                        <% let cohort = ""; %> 
+                        <% let index = []; %>
+                  
+                        <% for (let j = 0; j < team.quantity; j++) { %>
+                              <% let random = Math.floor(Math.random() * (team.length)) %> 
+                              <% if (index.includes(random)) { %> 
+                                    <% random = Math.floor(Math.random() * (team.length)) %> 
+                                    <% index.push(random) %> 
+                              <%  } else { %>
+                                    <% index.push(random) %> 
+                              <% } %>
+                        <% } %>
+                  
+                        <% for (let i = 0; i < index.length; i++) { %> 
+                              <% const temp = team[index[i]] %> 
+                              <% cohort += temp + ", " %> 
+                        <% } %>
+                        <% names = cohort.split(",").join(""); %> 
+                        <% console.log(names) %> 
+                  <% } %>
+            
+                  <% assignTeam(team) %>  
+
+            <% } %> 
+      <% } %> 
+
+</form>
+
+
+<%- include("./partials/footer") %>
