@@ -4,7 +4,7 @@ const logger = require("morgan")
 const cookieParser = require("cookie-parser")
 const methodOverride = require("method-override")
 const teamRouter = require("./routes/teamPicker");
-const { patch } = require("./routes/teamPicker")
+
 
 const app = express();
 
